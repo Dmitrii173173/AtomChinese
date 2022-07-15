@@ -16,6 +16,11 @@ namespace Nucleus.EntityFramework
             : base(options)
         {
             Database.EnsureCreated();
+
+            this.Questions.Add(new Nucleus.Core.Questions.Question()
+            {
+                Text = "er3wqd"
+            });
         }
         public DbSet<Nucleus.Core.Questions.Question> Questions { get; set; }
         public DbSet<Permission> Permissions { get; set; }

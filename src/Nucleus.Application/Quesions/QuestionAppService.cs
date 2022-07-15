@@ -1,7 +1,9 @@
-﻿using Nucleus.Core.Questions;
+﻿using Nucleus.Application.Quesions.Dto;
+using Nucleus.Core.Questions;
 using Nucleus.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +16,13 @@ namespace Nucleus.Application.Quesions
         {
             _dbContext = dbContext;
         }
-        public IEnumerable<Question> GetQuestions() 
+        public List<QuestionsListOutput> GetQuestions() 
         {
-            return _dbContext.Questions;
+            return _dbContext.Questions.Select(x => new QuestionsListOutput()
+            {
+                Text = x.Text,
+                CreationDate = x.CreationDate,
+            }).ToList();
         }
     }
 }
