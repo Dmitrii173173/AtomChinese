@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Nucleus.Core.News;
 using Nucleus.Core.Permissions;
+using Nucleus.Core.Questions;
 using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
 
@@ -16,7 +17,7 @@ namespace Nucleus.EntityFramework
         {
             Database.EnsureCreated();
         }
-
+        public DbSet<Nucleus.Core.Questions.Question> Questions { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<Nucleus.Core.Exceptions.Exception> Exceptions { get; set; }
@@ -67,6 +68,7 @@ namespace Nucleus.EntityFramework
                 b.HasData(SeedData.BuildApplicationUserRoles());
             }));
 
+            modelBuilder.Entity<Nucleus.Core.Questions.Question>().ToTable("Questions");
             modelBuilder.Entity<Nucleus.Core.Exceptions.Exception>().ToTable("Exceptions");
             modelBuilder.Entity<News>().ToTable("News");
             modelBuilder.Entity<UserClaim>().ToTable("UserClaim");
